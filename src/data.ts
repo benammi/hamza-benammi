@@ -7,22 +7,40 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/hamza-benammi',
   cv: '/Hamza_Benammi_Senior_Software_Engineer.pdf',
   summary:
-    'I design and ship backend platforms and AWS serverless systems for SaaS products: the business logic, APIs, data models, security and delivery pipelines behind them.',
+    '8+ years across networks, backend and AWS. Now I build RAG systems and AI agents that automate real work, and I ship them with the engineering discipline AI alone doesn\'t have.',
 }
 
 export const stats = [
-  { value: '8+', label: 'years shipping software' },
-  { value: '2', label: 'SaaS platforms led end to end' },
-  { value: '4', label: 'environments per release path' },
+  { to: 8, suffix: '+', label: 'years building software' },
+  { to: 2, suffix: '', label: 'SaaS platforms led end to end' },
+  { to: 4, suffix: '', label: 'environments per release path' },
+  { to: 3, suffix: '', label: 'AI stacks: Bedrock, RAG, Ollama' },
 ]
 
 export const expertise = [
-  { title: 'Backend architecture', text: 'Node.js, TypeScript, Laravel. Service boundaries, REST contracts, business logic.' },
-  { title: 'AWS & IaC', text: 'Lambda, API Gateway, DynamoDB, S3, CloudFront, CloudFormation.' },
-  { title: 'Security & data', text: 'RBAC and permissions middleware for multi-tenant SaaS. DynamoDB access patterns, PostgreSQL.' },
-  { title: 'Quality engineering', text: 'Unit, API, integration and E2E with Jest, Vitest, Cypress and Playwright.' },
-  { title: 'Technical leadership', text: 'Sprint planning, estimation, code review, defect triage and root cause.' },
-  { title: 'AI engineering', text: 'Amazon Bedrock, RAG, fine-tuning experiments and local agents with Ollama.' },
+  { tag: 'AI', title: 'RAG & applied AI', text: 'Retrieval-augmented generation, fine-tuning experiments and prompt engineering on Amazon Bedrock and local Ollama models.', big: true },
+  { tag: 'Agents', title: 'Agents & automation', text: 'Web-aware assistants, code generation, document workflows and browser automation that replace manual work.', big: false },
+  { tag: 'AWS', title: 'Serverless backends', text: 'Lambda, API Gateway, DynamoDB, S3, CloudFront and CloudFormation, with RBAC for multi-tenant SaaS.', big: false },
+  { tag: 'Quality', title: 'Tests as the safety net', text: 'Jest, Vitest, Cypress and Playwright gate every release, which is what makes AI-assisted speed safe.', big: false },
+  { tag: 'Lead', title: 'Technical leadership', text: 'Architecture, API contracts, sprint planning, code review and root-cause analysis.', big: false },
+  { tag: 'Infra', title: 'From network to cloud', text: 'A networking and Linux foundation (ISIM diploma, OwnCloud and LAN administration) under every cloud design.', big: true },
+]
+
+export const workflow = [
+  { n: '01', title: 'I write the spec', text: 'Architecture, API contracts, data flows and acceptance criteria come from me, before any agent runs.', who: 'human' },
+  { n: '02', title: 'Agents do the volume', text: 'Scaffolding, refactors, test generation and docs go to AI agents, in parallel and fast.', who: 'ai' },
+  { n: '03', title: 'Tests are the gate', text: 'Unit, API, E2E and manual checks decide what ships. Nothing merges on vibes.', who: 'both' },
+  { n: '04', title: 'I review every diff', text: 'Security, RBAC, cost, failure modes and edge cases: the judgement that years in production teach.', who: 'human' },
+]
+
+export const principles = [
+  { k: 'Experience is the multiplier', v: 'AI makes writing code cheap. Knowing what to build, what breaks at scale and what is safe to ship is the part that still takes years.' },
+  { k: 'Fundamentals, not just prompts', v: 'Networking, Linux, databases and cloud internals let me debug what an agent got wrong instead of guessing.' },
+  { k: 'Automate the boring, own the risky', v: 'Agents take the repetitive work. I stay accountable for architecture, security and production.' },
+]
+
+export const marquee = [
+  'Amazon Bedrock', 'RAG', 'Ollama', 'AI agents', 'Prompt engineering', 'Fine-tuning', 'Node.js', 'TypeScript', 'AWS Lambda', 'DynamoDB', 'CloudFormation', 'Playwright', 'Selenium', 'Docker', 'Kubernetes', 'PostgreSQL', 'CI/CD', 'Python',
 ]
 
 export const pipeline = [
