@@ -45,15 +45,9 @@ export function initMotion() {
   const cleanups: Array<() => void> = []
 
   const ctx = gsap.context(() => {
-    // 1. Hero intro: words rise out of a mask, then the rest settles in.
-    gsap
-      .timeline({ defaults: { ease: 'power4.out' } })
-      .fromTo('.badge', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.7 })
-      .fromTo('.hero h1 .wi', { yPercent: 115, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1.1, stagger: 0.12 }, '-=0.4')
-      .fromTo('.hero .rotator, .hero .lead, .hero .actions, .hero .cue', { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1 }, '-=0.7')
-      .fromTo('.rag-wrap', { autoAlpha: 0, y: 60, scale: 0.97 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.1 }, '-=0.5')
+    document.documentElement.classList.add('motion')
 
-    // 2. Hero copy drifts away as you leave it.
+    // 1. Hero copy drifts away as you leave it.
     gsap.to('.hero-copy', {
       yPercent: -10,
       autoAlpha: 0.15,
@@ -81,13 +75,13 @@ export function initMotion() {
 
     // 5. Staggered entrances for everything else.
     ScrollTrigger.batch(REVEAL, {
-      start: 'top 90%',
+      start: 'top 125%',
       once: true,
       onEnter: (els) =>
-        gsap.fromTo(els, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.1, ease: 'power3.out', overwrite: true }),
+        gsap.fromTo(els, { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55, stagger: 0.06, ease: 'power2.out', overwrite: true }),
     })
     gsap.utils.toArray<HTMLElement>('.sec-head').forEach((el) =>
-      gsap.fromTo(el, { '--line': 0 }, { '--line': 1, ease: 'power2.out', duration: 1.2, scrollTrigger: { trigger: el, start: 'top 88%', once: true } }),
+      gsap.fromTo(el, { '--line': 0 }, { '--line': 1, ease: 'power2.out', duration: 1.2, scrollTrigger: { trigger: el, start: 'top 120%', once: true } }),
     )
 
     // 6. Timeline line draws itself.
@@ -146,9 +140,9 @@ export function initMotion() {
 
     mm.add('(max-width: 860px)', () => {
       ScrollTrigger.batch('.flow li, .bcard, .case', {
-        start: 'top 90%',
+        start: 'top 125%',
         once: true,
-        onEnter: (els) => gsap.fromTo(els, { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.12, duration: 0.7 }),
+        onEnter: (els) => gsap.fromTo(els, { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.08, duration: 0.5 }),
       })
     })
 
@@ -215,6 +209,7 @@ export function initMotion() {
 
   return () => {
     cleanups.forEach((fn) => fn())
+    document.documentElement.classList.remove('motion')
     ctx.revert()
     document.removeEventListener('click', onAnchor)
     gsap.ticker.remove(tick)

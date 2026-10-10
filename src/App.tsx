@@ -7,7 +7,6 @@ import Pipeline from './components/Pipeline'
 import RagDemo from './components/RagDemo'
 import Scramble from './components/Scramble'
 import Terminal from './components/Terminal'
-import { initMotion } from './lib/motion'
 import {
   building,
   caseStudies,
@@ -29,12 +28,14 @@ const nav = ['ask', 'ai', 'building', 'work', 'hire', 'experience', 'contact']
 const railIds = ['ask', 'ai', 'building', 'work', 'hire', 'experience', 'skills', 'contact']
 const year = new Date().getFullYear()
 
-function Split({ text, className = '' }: { text: string; className?: string }) {
+function Split({ text, className = '', from = 0 }: { text: string; className?: string; from?: number }) {
   return (
     <>
       {text.split(' ').map((w, i) => (
         <span className="w" key={i}>
-          <span className={`wi ${className}`}>{w}</span>
+          <span className={`wi ${className}`} style={{ ['--i' as string]: from + i }}>
+            {w}
+          </span>
         </span>
       ))}
     </>
@@ -73,8 +74,18 @@ function useEffects() {
     }
     window.addEventListener('pointermove', onMove)
     window.addEventListener('scroll', onScroll, { passive: true })
-    const stopMotion = initMotion()
+    // Load GSAP + Lenis after first paint so the hero is visible immediately.
+    let stopMotion = () => {}
+    let cancelled = false
+    const load = () =>
+      import('./lib/motion').then((m) => {
+        if (!cancelled) stopMotion = m.initMotion()
+      })
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback
+    const handle = idle ? idle(load) : window.setTimeout(load, 250)
     return () => {
+      cancelled = true
+      if (!idle) clearTimeout(handle)
       stopMotion()
       window.removeEventListener('pointermove', onMove)
       window.removeEventListener('scroll', onScroll)
@@ -140,7 +151,7 @@ export default function App() {
             <h1>
               <Split text="Senior engineer." />
               <br />
-              <Split text="AI-native builder." className="grad" />
+              <Split text="AI-native builder." className="grad" from={2} />
             </h1>
             <p className="rotator">
               I build <Scramble words={rotator} />

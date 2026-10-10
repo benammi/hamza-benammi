@@ -1568,13 +1568,37 @@ footer {
   display: inline-block;
 }
 
-.motion .wi,
-.motion .badge,
-.motion .hero .rotator,
-.motion .hero .lead,
-.motion .hero .actions,
-.motion .hero .cue,
-.motion .rag-wrap,
+/* hero intro: pure CSS so it never waits for JavaScript */
+.intro .wi {
+  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.1s + var(--i, 0) * 0.09s);
+}
+
+.intro .badge {
+  animation: fadeUp 0.7s ease both;
+}
+
+.intro .hero .rotator {
+  animation: fadeUp 0.7s 0.45s ease both;
+}
+
+.intro .hero .lead {
+  animation: fadeUp 0.7s 0.55s ease both;
+}
+
+.intro .hero .actions {
+  animation: fadeUp 0.7s 0.65s ease both;
+}
+
+.intro .hero .cue {
+  animation: fadeUp 0.7s 0.75s ease both;
+}
+
+.intro .rag-wrap {
+  animation: fadeUp 0.9s 0.7s ease both;
+}
+
+/* below the fold: hidden only once the motion module is ready, revealed before they scroll into view */
 .motion .stats li,
 .motion .sec-head h2,
 .motion .offer,
@@ -1590,6 +1614,20 @@ footer {
 .motion .contact .mail,
 .motion .contact .actions {
   visibility: hidden;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(115%);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
 }
 
 @keyframes blink {
