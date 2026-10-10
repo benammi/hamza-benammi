@@ -16,9 +16,8 @@ export const rotator = ['RAG assistants', 'n8n automations', 'serverless backend
 
 export const stats = [
   { to: 8, suffix: '+', label: 'years building software' },
-  { to: 2, suffix: '', label: 'SaaS platforms led end to end' },
-  { to: 6, suffix: '', label: 'AI & automation projects in flight' },
-  { to: 3, suffix: '', label: 'working languages: AR, FR, EN' },
+  { to: 7, suffix: '+', label: 'SaaS platforms & products delivered end to end' },
+  { to: 10, suffix: '+', label: 'AI & optimization projects live in the world' },
 ]
 
 export const workflow = [
@@ -45,9 +44,9 @@ export type Building = {
 // Unreleased work is described by what it does, not by client or product names.
 export const building: Building[] = [
   {
-    name: 'Top in Morocco',
+    name: 'AI travel guide',
     status: 'In development · pilot deployed',
-    blurb: 'An AI travel guide and trip planner for Morocco that understands English, French, Arabic and Darija.',
+    blurb: 'An AI travel guide and trip planner that understands English, French, Arabic and Darija.',
     points: [
       'Natural-language search and day-by-day trip planning with budget, party size and transport estimates.',
       'Data pipeline from open data into PostGIS, deduplicated and validated. AI proposes, sources decide: it never invents places or prices.',
@@ -56,7 +55,7 @@ export const building: Building[] = [
     stack: ['Node.js', 'PostgreSQL / PostGIS', 'pgvector', 'Ollama', 'Next.js'],
   },
   {
-    name: 'Content automation on n8n',
+    name: 'Content optimization system',
     status: 'In development · dry-run verified',
     blurb: 'A reusable, local-first n8n system that turns a company profile into researched, quality-checked, approved content.',
     points: [
@@ -78,23 +77,23 @@ export const building: Building[] = [
     stack: ['RAG', 'Node.js', 'Python', 'n8n', 'AWS'],
   },
   {
-    name: 'Law-firm SaaS for Morocco',
+    name: 'Commercial law-firm SaaS',
     status: 'In development · private pilot',
-    blurb: 'A bilingual (Arabic RTL and French) practice-management platform with court monitoring and AI that always defers to a lawyer.',
+    blurb: 'A platform for firms that manage companies\' commercial law: matters, hearings, deadlines and documents, with AI that helps build the case.',
     points: [
+      'AI assistance for case building: organising facts and documents and drafting arguments, always reviewed by a lawyer.',
       '.NET / C# API on PostgreSQL, a background worker for court-calendar monitoring and a Next.js live app.',
-      'Role-based access, audit trail, backups with restore verification and a one-command local pilot.',
-      '200+ automated tests across backend, frontend and browser gates.',
+      'Role-based access, audit trail, backups with restore verification and 200+ automated tests.',
     ],
     stack: ['C# / .NET', 'PostgreSQL', 'Next.js', 'Docker', 'Playwright'],
   },
   {
     name: 'Exception-driven vertical SaaS',
     status: 'Prototypes · accounting & HR',
-    blurb: 'Morocco-first accounting and HR platforms where AI finishes routine work and escalates only the ambiguous cases.',
+    blurb: 'Accounting and HR platforms where AI finishes routine work and escalates only the ambiguous cases.',
     points: [
       'A guided payroll story: safe exceptions resolved automatically, ambiguous ones routed to a human, confirmation required before payroll.',
-      'Role-aware interfaces for firm staff, clients and employees, in French and Arabic.',
+      'Role-aware interfaces for firm staff, clients and employees.',
     ],
     stack: ['Next.js', 'TypeScript', 'Tailwind', 'Recharts'],
   },
@@ -107,6 +106,16 @@ export const building: Building[] = [
       'Shared validation, types, design tokens and a program-generation engine used by every client.',
     ],
     stack: ['React Native (Expo)', 'NestJS', 'Next.js', 'Prisma', 'Zod'],
+  },
+  {
+    name: 'Pharmacy document verification',
+    status: 'Private project',
+    blurb: 'A platform for pharmacies that checks whether the required documents exist, and flags what is missing.',
+    points: [
+      'Automated presence checks replace manual document hunting.',
+      'Clear results per pharmacy, so the team acts only on exceptions.',
+    ],
+    stack: ['Document verification', 'Automation'],
   },
 ]
 
@@ -122,10 +131,10 @@ export type Case = {
 export const caseStudies: Case[] = [
   {
     name: 'Accessibility audit platform',
-    org: 'Stryve · Inveneo (Vially)',
+    org: 'Stryve · Inveneo (Vially, IA Labs)',
     problem: 'Teams needed repeatable WCAG audits of complex, authenticated websites, with evidence they could track across scans, not one-off reports.',
     built: [
-      'Audit engine on Selenium, Playwright and Node.js: authenticated sessions, device simulation, custom criteria, screenshots, multi-page runs.',
+      'I designed and built the audit engine from scratch on Selenium, Playwright and Node.js, to go beyond what axe-core and Lighthouse check: authenticated sessions, device simulation, custom criteria, screenshots, multi-page runs.',
       'Serverless workflows on Lambda, API Gateway, S3, DynamoDB and CloudFront for scanning, monitoring, reporting and analytics.',
       'Issue lifecycle logic that closes resolved findings and reopens recurring ones across repeated scans.',
       'Stripe billing: plan selection, upgrades, add-ons and tax previews.',
@@ -175,20 +184,21 @@ export const experience = [
     role: 'AI & automation engineer',
     period: 'Ongoing',
     points: [
-      'Building RAG assistants, n8n content-automation pipelines and multilingual AI products for service businesses and early-stage SaaS.',
-      'Delivering web and mobile apps with React, Next.js, React Native and C# / .NET.',
+      'Building RAG assistants, n8n content-optimization pipelines and multilingual AI products for service businesses and early-stage SaaS.',
+      'Delivered several client platforms, including for travel agencies and a real-estate data collection product.',
+      'Web and mobile apps with React, Next.js, React Native and C# / .NET.',
     ],
   },
   {
     company: 'Inveneo',
     role: 'AWS Engineer · Senior Backend & Technical Lead',
-    period: '2025 – now',
+    period: '2025 – 2026',
     points: [
-      'Lead backend and business logic for Vially: Node.js services and AWS serverless workflows.',
-      'Built a Bedrock RAG service that suggests remediation and code fixes for audit findings.',
-      'Define architecture, API contracts and data flows; coordinate with frontend engineers.',
-      'Design DynamoDB schemas, CloudFormation infrastructure and RBAC middleware.',
-      'Plan sprints in Jira, review implementation, support defect triage and root-cause analysis.',
+      'Led backend and business logic for Vially and IA Labs: Node.js services and AWS serverless workflows.',
+      'Built the accessibility audit engine behind both products, plus a Bedrock RAG service that suggests remediation and code fixes.',
+      'Defined architecture, API contracts and data flows; coordinated with frontend engineers.',
+      'Designed DynamoDB schemas, CloudFormation infrastructure and RBAC middleware.',
+      'Planned sprints in Jira, reviewed implementation, supported defect triage and root-cause analysis.',
     ],
   },
   {
@@ -212,7 +222,7 @@ export const experience = [
     company: 'Profonde Solution',
     role: 'Full-stack Developer · Enterprise ERP',
     period: '2021 – 2022',
-    points: ['Backend modules in PHP / Laravel and interactive features in Vue.js and Livewire for a large multi-module ERP.', 'PostgreSQL data models in an Agile / Scrum team.'],
+    points: ['Delivered two SaaS platforms end to end, including backend modules in PHP / Laravel and interactive features in Vue.js and Livewire.', 'PostgreSQL data models in an Agile / Scrum team.'],
   },
   {
     company: 'Freelance',
@@ -249,4 +259,4 @@ export const education = [
   { school: 'ISIM', degree: 'Diploma in IT Maintenance, Support & Networks', period: '2013 – 2015' },
 ]
 
-export const languages = ['Arabic', 'French', 'English']
+export const languages = ['Arabic', 'English', 'French (understand, basic)']

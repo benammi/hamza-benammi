@@ -11,8 +11,8 @@ export const chunks: Chunk[] = [
   {
     id: 'inveneo',
     title: 'Inveneo — Senior Backend & Technical Lead',
-    source: 'CV · Experience · 2025–now',
-    text: 'Since August 2025 Hamza leads backend engineering and business logic for Vially at Inveneo. He structures Node.js services and AWS serverless workflows for accessibility scanning, monitoring, reporting and analytics. He defines solution architecture, REST API contracts and data flows, and coordinates with frontend engineers. He plans sprints in Jira, reviews technical implementation and supports defect triage and root-cause analysis.',
+    source: 'CV · Experience · 2025–2026',
+    text: 'From August 2025 Hamza led backend engineering and business logic for Vially and IA Labs at Inveneo, a role he has since left, and he now works independently as a freelancer. He structured Node.js services and AWS serverless workflows for accessibility scanning, monitoring, reporting and analytics. He defined solution architecture, REST API contracts and data flows, and coordinated with frontend engineers. He planned sprints in Jira, reviewed technical implementation and supported defect triage and root-cause analysis.',
   },
   {
     id: 'stryve',
@@ -30,7 +30,7 @@ export const chunks: Chunk[] = [
     id: 'audit-engine',
     title: 'Accessibility audit engine',
     source: 'CV · Projects',
-    text: 'Hamza designed an automated engine that scans complex websites. It supports authenticated sessions and device simulation, runs custom accessibility criteria, captures screenshot evidence and produces structured reports for repeated audits and monitoring. It is built with Selenium, Playwright, Puppeteer and Node.js. Browser automation, website scanning and data-extraction workflows are a core strength.',
+    text: 'Hamza designed and built an accessibility audit engine from scratch, built to go beyond what axe-core and Lighthouse check. It scans complex websites and supports authenticated sessions and device simulation, runs custom accessibility criteria, captures screenshot evidence and produces structured reports for repeated audits and monitoring. It is built with Selenium, Playwright, Puppeteer and Node.js. Browser automation, website scanning and data-extraction workflows are a core strength.',
   },
   {
     id: 'lifecycle',
@@ -102,7 +102,7 @@ export const chunks: Chunk[] = [
     id: 'education',
     title: 'Education & languages',
     source: 'CV · Education',
-    text: 'Hamza holds a Diploma in Software Development from ISTA NTIC (2016–2018) and a diploma in IT Maintenance, Support and Networks from ISIM (2013–2015). He speaks Arabic, French and English.',
+    text: 'Hamza holds a Diploma in Software Development from ISTA NTIC (2016–2018) and a diploma in IT Maintenance, Support and Networks from ISIM (2013–2015). He speaks Arabic and English, and understands French with basic ability.',
   },
   {
     id: 'stack',
@@ -111,16 +111,28 @@ export const chunks: Chunk[] = [
     text: 'Hamza programs in JavaScript, TypeScript, Node.js, Python, C#, PHP and SQL, with earlier experience in Java and ASP.NET. He works with Express, Laravel, Vue.js, Livewire and React, and databases including PostgreSQL, DynamoDB and MySQL.',
   },
   {
-    id: 'top-in-morocco',
-    title: 'Top in Morocco — AI travel guide',
+    id: 'travel-guide',
+    title: 'AI travel guide',
     source: 'Projects · In development',
-    text: 'Top in Morocco is an AI travel guide and trip planner for Morocco that Hamza is building. It understands English, French, Arabic and Darija. Users search in natural language and get day-by-day trip plans with budget, party size and transport estimates. A data pipeline collects places from open data into PostGIS, deduplicates and validates them, and the AI proposes while sources decide, so it never invents places or prices. The API is a hexagonal Node.js service with hybrid keyword and vector retrieval and local Ollama models.',
+    text: 'Hamza is building an AI travel guide and trip planner. It understands English, French, Arabic and Darija. Users search in natural language and get day-by-day trip plans with budget, party size and transport estimates. A data pipeline collects places from open data into PostGIS, deduplicates and validates them, and the AI proposes while sources decide, so it never invents places or prices. The API is a hexagonal Node.js service with hybrid keyword and vector retrieval and local Ollama models.',
   },
   {
     id: 'n8n',
-    title: 'Content automation on n8n',
+    title: 'Content optimization system on n8n',
     source: 'Projects · In development',
-    text: 'Hamza is building a reusable local-first content automation system on n8n. It scores content ideas, researches them with recorded sources, writes an article and platform-specific social posts, runs automated quality checks and revision loops, and requires human approval before anything is published. Approved output is stored as immutable versioned artifacts with hashes. It runs in Docker with 13 exported workflows and a fail-closed dry-run mode. This is workflow automation with a human in the loop.',
+    text: 'Hamza is building a reusable local-first content optimization system on n8n. It scores content ideas, researches them with recorded sources, writes an article and platform-specific social posts, runs automated quality checks and revision loops, and requires human approval before anything is published. Approved output is stored as immutable versioned artifacts with hashes. It runs in Docker with 13 exported workflows and a fail-closed dry-run mode. This is workflow automation with a human in the loop.',
+  },
+  {
+    id: 'pharmacy',
+    title: 'Pharmacy document verification',
+    source: 'Projects · Private',
+    text: 'Hamza is building a platform for pharmacies that checks whether the required documents exist and flags what is missing, replacing manual document hunting with automated presence checks.',
+  },
+  {
+    id: 'platforms',
+    title: 'SaaS platforms delivered',
+    source: 'CV & Projects',
+    text: 'Hamza has delivered more than seven SaaS platforms and products end to end: two at Profonde Solution, one at Stryve, one at Inveneo, and several as a freelancer, including platforms for travel agencies and a real-estate data collection and resale product. He also has more than ten AI and optimization projects live in the world.',
   },
   {
     id: 'ai-venture',
@@ -130,15 +142,15 @@ export const chunks: Chunk[] = [
   },
   {
     id: 'legal-saas',
-    title: 'Law-firm SaaS for Morocco',
+    title: 'Commercial law-firm SaaS',
     source: 'Projects · In development',
-    text: 'Hamza is building a bilingual Arabic (right-to-left) and French practice-management SaaS for Moroccan law firms. The backend uses C# and .NET with PostgreSQL, a background worker monitors court calendars, and the live app uses Next.js. It has role-based access, audit trails, backup and restore verification, over 200 automated tests, and AI features that always defer to a lawyer for review.',
+    text: 'Hamza is building a SaaS platform for firms that manage companies\' commercial law, covering matters, hearings, deadlines and documents. It includes AI that helps build the case by organising facts and documents and drafting arguments, always reviewed by a lawyer. The backend uses C# and .NET with PostgreSQL, a background worker monitors court calendars, and the live app uses Next.js. It has role-based access, audit trails, backup and restore verification, and over 200 automated tests.',
   },
   {
     id: 'vertical-saas',
     title: 'Accounting & HR SaaS prototypes',
     source: 'Projects · Prototypes',
-    text: 'Hamza has prototyped Morocco-first accounting and HR SaaS platforms built on exception-driven AI. Routine work completes automatically from approved rules, while ambiguous or sensitive decisions are escalated to a human. The guided payroll demo resolves safe attendance exceptions automatically and requires human confirmation before payroll. They use Next.js, TypeScript and Tailwind in French and Arabic.',
+    text: 'Hamza has prototyped accounting and HR SaaS platforms built on exception-driven AI. Routine work completes automatically from approved rules, while ambiguous or sensitive decisions are escalated to a human. The guided payroll demo resolves safe attendance exceptions automatically and requires human confirmation before payroll. They use Next.js, TypeScript and Tailwind.',
   },
   {
     id: 'mobile',
