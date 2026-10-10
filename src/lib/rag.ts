@@ -1,7 +1,8 @@
+import { faqs } from '../faq'
 import { chunks, type Chunk } from '../knowledge'
 
 const STOP = new Set(
-  'a an the is are was were be been do does did has have had he his him she her it its of in on at to for from with and or but not what which who how why when where about tell me can could would should any his hamza'.split(
+  'a an the is are was were be been do does did has have had he his him she her it its of in on at to for from with and or but not what which who how why when where about tell me can could would should any his hamza you your yours know knows do give get'.split(
     ' ',
   ),
 )
@@ -72,26 +73,31 @@ function expand(tokens: string[]): string[] {
   return [...out]
 }
 
-// Precompute BM25 stats once.
-const docs = chunks.map((c) => tokenize(`${c.title} ${c.title} ${c.text}`))
-const avgLen = docs.reduce((n, d) => n + d.length, 0) / docs.length
-const df = new Map<string, number>()
-docs.forEach((d) => new Set(d).forEach((t) => df.set(t, (df.get(t) ?? 0) + 1)))
-
 const K1 = 1.4
 const B = 0.75
 
-function bm25(query: string[], doc: string[]) {
-  let score = 0
-  for (const q of query) {
-    const f = doc.filter((t) => t === q).length
-    if (!f) continue
-    const n = df.get(q) ?? 0
-    const idf = Math.log(1 + (docs.length - n + 0.5) / (n + 0.5))
-    score += (idf * f * (K1 + 1)) / (f + K1 * (1 - B + (B * doc.length) / avgLen))
+// Small BM25 index factory so the curated FAQ and the CV passages are scored the same way.
+function buildIndex(texts: string[]) {
+  const docs = texts.map(tokenize)
+  const avgLen = docs.reduce((n, d) => n + d.length, 0) / docs.length
+  const df = new Map<string, number>()
+  docs.forEach((d) => new Set(d).forEach((t) => df.set(t, (df.get(t) ?? 0) + 1)))
+  return (query: string[], i: number) => {
+    const doc = docs[i]
+    let score = 0
+    for (const q of query) {
+      const f = doc.filter((t) => t === q).length
+      if (!f) continue
+      const n = df.get(q) ?? 0
+      const idf = Math.log(1 + (docs.length - n + 0.5) / (n + 0.5))
+      score += (idf * f * (K1 + 1)) / (f + K1 * (1 - B + (B * doc.length) / avgLen))
+    }
+    return score
   }
-  return score
 }
+
+const chunkScore = buildIndex(chunks.map((c) => `${c.title} ${c.title} ${c.text}`))
+const faqScore = buildIndex(faqs.map((f) => `${f.q} ${f.q} ${f.alts.join(' ')}`))
 
 export type Hit = { chunk: Chunk; score: number }
 
@@ -101,44 +107,62 @@ export type RagResult = {
   hits: Hit[]
   answer: string
   grounded: boolean
+  /** faq = curated answer, chunks = quoted from CV passages, none = not covered */
+  kind: 'faq' | 'chunks' | 'none'
+  /** closest answerable questions, shown when nothing matched */
+  related: string[]
 }
 
-const MIN_SCORE = 2.2
+const MIN_CHUNK = 2.2
+const MIN_FAQ = 2.4
 
 export function ask(query: string, k = 3): RagResult {
   const base = tokenize(query)
   const tokens = expand(base)
-  const ranked = chunks
-    .map((chunk, i) => ({ chunk, score: bm25(tokens, docs[i]) }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, k)
-    .filter((h) => h.score > 0)
 
+  const faqRanked = faqs
+    .map((faq, i) => ({ faq, score: faqScore(tokens, i) }))
+    .sort((a, b) => b.score - a.score)
+
+  const chunkRanked = chunks
+    .map((chunk, i) => ({ chunk, score: chunkScore(tokens, i) }))
+    .sort((a, b) => b.score - a.score)
+
+  const bestFaq = faqRanked[0]
+  const related = faqRanked.filter((f) => f.score > 0).slice(0, 3).map((f) => f.faq.q)
+
+  // 1. Curated answer wins when the question clearly matches one.
+  const topChunk = chunkRanked[0]?.score ?? 0
+  if (bestFaq && bestFaq.score >= MIN_FAQ && bestFaq.score * 3 >= topChunk) {
+    const hits = bestFaq.faq.sources
+      .map((id) => chunkRanked.find((c) => c.chunk.id === id))
+      .filter((h): h is Hit => !!h)
+      .map((h) => ({ chunk: h.chunk, score: Math.max(h.score, 1) }))
+    return { query, tokens: base, hits, answer: bestFaq.faq.a, grounded: true, kind: 'faq', related: [] }
+  }
+
+  // 2. Otherwise quote the best-matching CV passages.
+  const ranked = chunkRanked.slice(0, k).filter((h) => h.score > 0)
   const top = ranked[0]
-  if (!top || top.score < MIN_SCORE) {
+  if (!top || top.score < MIN_CHUNK) {
     return {
       query,
-      tokens,
-      hits: ranked,
+      tokens: base,
+      hits: [],
       grounded: false,
-      answer:
-        "That's not in Hamza's CV, so I won't guess. Try asking about his AI/RAG work, AWS, leadership, automation or education — or email him directly.",
+      kind: 'none',
+      related: related.length ? related : ['What AI experience do you have?', 'Are you available for projects?', 'What are you building right now?'],
+      answer: "I don't have a good answer for that, and I won't guess. Here are the closest things I can answer, or you can send the question to me directly.",
     }
   }
 
-  // Extractive answer: pick the sentences that best match the query from the top chunks.
   const qset = new Set(tokens)
   const sentences = ranked
     .filter((h) => h.score >= top.score * 0.45)
     .flatMap((h, idx) =>
       h.chunk.text
         .split(/(?<=[.!?])\s+/)
-        .map((s, pos) => ({
-          s,
-          idx,
-          pos,
-          overlap: tokenize(s).filter((t) => qset.has(t)).length,
-        })),
+        .map((s, pos) => ({ s, idx, pos, overlap: tokenize(s).filter((t) => qset.has(t)).length })),
     )
     .filter((x) => x.overlap > 0)
     .sort((a, b) => b.overlap - a.overlap)
@@ -147,6 +171,5 @@ export function ask(query: string, k = 3): RagResult {
 
   const body = sentences.length ? sentences : [{ s: top.chunk.text.split(/(?<=[.!?])\s+/)[0], idx: 0, pos: 0 }]
   const answer = body.map((x) => `${x.s} [${x.idx + 1}]`).join(' ')
-
-  return { query, tokens: base, hits: ranked, answer, grounded: true }
+  return { query, tokens: base, hits: ranked, answer, grounded: true, kind: 'chunks', related: [] }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { profile } from '../data'
 import { suggestions } from '../knowledge'
 import { ask, type RagResult } from '../lib/rag'
 
@@ -18,7 +19,9 @@ function Typewriter({ text }: { text: string }) {
   )
 }
 
-const steps = ['Tokenize query', 'Retrieve (BM25 over CV chunks)', 'Rank + threshold', 'Compose cited answer']
+const steps = ['Understand question', 'Match curated answers', 'Else retrieve CV passages', 'Answer or admit it']
+
+const labels = { faq: 'curated answer', chunks: 'quoted from my CV', none: 'not covered yet' } as const
 
 export default function RagDemo() {
   const [value, setValue] = useState('')
@@ -49,7 +52,7 @@ export default function RagDemo() {
           <i /> live demo
         </span>
         <b>Ask anything about me</b>
-        <small>retrieval runs in your browser · answers cite their source chunks</small>
+        <small>runs in your browser · answers cite their sources · refuses to guess</small>
       </div>
 
       <form
@@ -90,7 +93,25 @@ export default function RagDemo() {
       <div className="rag-out" aria-live="polite">
         {result ? (
           <>
+            <p className={`kind ${result.kind}`}>{labels[result.kind]}</p>
             <Typewriter key={runId} text={result.answer} />
+            {result.kind === 'none' && (
+              <div className="related">
+                <div className="chips">
+                  {result.related.map((r) => (
+                    <button key={r} type="button" onClick={() => run(r)}>
+                      {r}
+                    </button>
+                  ))}
+                </div>
+                <a
+                  className="btn"
+                  href={`mailto:${profile.email}?subject=${encodeURIComponent('Question from your portfolio')}&body=${encodeURIComponent(result.query)}`}
+                >
+                  Send this question to Hamza
+                </a>
+              </div>
+            )}
             {result.hits.length > 0 && (
               <ul className="sources">
                 {result.hits.map((h, i) => (
@@ -99,7 +120,7 @@ export default function RagDemo() {
                       <em>[{i + 1}]</em> {h.chunk.title}
                       <small>{h.chunk.source}</small>
                     </div>
-                    <div className="bar" title={`BM25 score ${h.score.toFixed(1)}`}>
+                    <div className="bar" title={`relevance ${h.score.toFixed(1)}`}>
                       <i style={{ width: `${Math.max(6, (h.score / max) * 100)}%` }} />
                     </div>
                   </li>
@@ -108,7 +129,7 @@ export default function RagDemo() {
             )}
           </>
         ) : (
-          <p className="idle">Pick a question above. You'll see the query tokenised, chunks ranked, and an answer built only from my CV. If it isn't in there, it says so.</p>
+          <p className="idle">Pick a question above. I answer from curated answers and my CV, show my sources, and say so when I don't know. Try anything: stack, AI, rates, availability, projects.</p>
         )}
       </div>
     </div>
