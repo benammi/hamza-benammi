@@ -41,3 +41,30 @@ export function CliMock() {
     </pre>
   )
 }
+
+export function FixMock() {
+  return (
+    <div className="mock" aria-hidden="true">
+      <div className="mock-bar">
+        <span /> <span /> <span />
+        <b>suggestion · grounded in knowledge base</b>
+      </div>
+      <div className="fix">
+        <p className="fix-finding">
+          <em>Finding</em> Image has no alternative text
+        </p>
+        <pre>
+          <span className="del">- &lt;img src="team.jpg"&gt;</span>
+          {'\n'}
+          <span className="add">+ &lt;img src="team.jpg" alt="Support team at work"&gt;</span>
+        </pre>
+        <div className="fix-meta">
+          <i>WCAG 1.1.1</i>
+          <i>3 sources</i>
+          <i>RAG</i>
+        </div>
+      </div>
+      <p className="mock-note">Illustrative: remediation and code-fix suggestions for audit findings.</p>
+    </div>
+  )
+}

@@ -3,9 +3,9 @@ import { profile } from '../data'
 
 type Item = { label: string; hint: string; run: () => void }
 
-const sections = ['ask', 'ai', 'about', 'work', 'experience', 'terminal', 'skills', 'contact']
+const sections = ['ask', 'ai', 'building', 'work', 'hire', 'experience', 'terminal', 'skills', 'contact']
 
-export default function Palette() {
+export default function Palette({ onToggleTheme }: { onToggleTheme: () => void }) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -21,8 +21,9 @@ export default function Palette() {
       { label: 'Email Hamza', hint: 'mailto', run: () => (window.location.href = `mailto:${profile.email}`) },
       { label: 'Open GitHub', hint: 'link', run: () => window.open(profile.github, '_blank') },
       { label: 'Open LinkedIn', hint: 'link', run: () => window.open(profile.linkedin, '_blank') },
+      { label: 'Toggle light / dark', hint: 'ui', run: onToggleTheme },
     ],
-    [],
+    [onToggleTheme],
   )
 
   const filtered = items.filter((i) => i.label.toLowerCase().includes(query.toLowerCase()))

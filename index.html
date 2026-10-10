@@ -12,10 +12,10 @@
     <meta property="og:title" content="Hamza Benammi — Senior Software Engineer" />
     <meta
       property="og:description"
-      content="Backend, AWS & cloud-native systems. 8+ years building SaaS platforms."
+      content="Applied AI, automation and cloud backends. 8+ years building SaaS platforms."
     />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#08090b" />
+    <meta name="theme-color" content="#07070b" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,7 +25,11 @@
   </head>
   <body>
     <script>
-      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion")
+      var d = document.documentElement
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("motion")
+      var t = null
+      try { t = localStorage.getItem("theme") } catch (e) {}
+      d.dataset.theme = t === "light" || t === "dark" ? t : matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

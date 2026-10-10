@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { education, experience, languages, profile, skills } from '../data'
+import { building, education, experience, languages, profile, skills } from '../data'
 
 type Line = { kind: 'in' | 'out'; text: string }
 
 const commands: Record<string, () => string> = {
-  help: () => 'commands: whoami, skills, experience, education, contact, clear',
+  help: () => 'commands: whoami, building, skills, experience, education, contact, clear',
+  building: () => building.map((b) => `${b.name.padEnd(36)} ${b.status}`).join('\n'),
   whoami: () => `${profile.name} — ${profile.title}\n${profile.summary}`,
   skills: () =>
     Object.entries(skills)

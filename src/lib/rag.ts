@@ -33,6 +33,19 @@ const SYNONYMS: Record<string, string[]> = {
   school: ['education', 'diploma'],
   database: ['dynamodb', 'postgresql', 'mysql'],
   security: ['rbac', 'authentication', 'permissions'],
+  n8n: ['automation', 'workflow', 'content', 'approval'],
+  workflow: ['n8n', 'automation', 'automate'],
+  mobile: ['react', 'native', 'expo', 'c#', 'fitness'],
+  app: ['mobile', 'web', 'react', 'next'],
+  available: ['freelance', 'projects', 'contracts', 'hire', 'contact'],
+  availability: ['available', 'freelance', 'projects', 'contracts'],
+  freelance: ['projects', 'contracts', 'available'],
+  project: ['building', 'development', 'projects'],
+  building: ['development', 'projects', 'top', 'morocco'],
+  travel: ['top', 'morocco', 'trip', 'guide'],
+  legal: ['law', 'firm', 'saas'],
+  law: ['legal', 'firm', 'saas'],
+  language: ['arabic', 'french', 'english', 'darija'],
 }
 
 function stem(w: string) {

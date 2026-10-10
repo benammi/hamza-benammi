@@ -48,7 +48,7 @@ export default function RagDemo() {
         <span className="live">
           <i /> live demo
         </span>
-        <b>Ask my CV</b>
+        <b>Ask anything about me</b>
         <small>retrieval runs in your browser · answers cite their source chunks</small>
       </div>
 
@@ -62,7 +62,7 @@ export default function RagDemo() {
         <input
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Ask anything: AI work, leadership, AWS, networking…"
+          placeholder="What is he building? Can he automate with n8n? Mobile?"
           aria-label="Ask a question about Hamza's CV"
         />
         <button type="submit" className="btn primary">

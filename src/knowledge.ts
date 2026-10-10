@@ -108,7 +108,49 @@ export const chunks: Chunk[] = [
     id: 'stack',
     title: 'Languages & frameworks',
     source: 'CV · Skills',
-    text: 'Hamza programs in JavaScript, TypeScript, Node.js, Python, PHP and SQL, with earlier experience in Java, C# and ASP.NET. He works with Express, Laravel, Vue.js, Livewire and React, and databases including PostgreSQL, DynamoDB and MySQL.',
+    text: 'Hamza programs in JavaScript, TypeScript, Node.js, Python, C#, PHP and SQL, with earlier experience in Java and ASP.NET. He works with Express, Laravel, Vue.js, Livewire and React, and databases including PostgreSQL, DynamoDB and MySQL.',
+  },
+  {
+    id: 'top-in-morocco',
+    title: 'Top in Morocco — AI travel guide',
+    source: 'Projects · In development',
+    text: 'Top in Morocco is an AI travel guide and trip planner for Morocco that Hamza is building. It understands English, French, Arabic and Darija. Users search in natural language and get day-by-day trip plans with budget, party size and transport estimates. A data pipeline collects places from open data into PostGIS, deduplicates and validates them, and the AI proposes while sources decide, so it never invents places or prices. The API is a hexagonal Node.js service with hybrid keyword and vector retrieval and local Ollama models.',
+  },
+  {
+    id: 'n8n',
+    title: 'Content automation on n8n',
+    source: 'Projects · In development',
+    text: 'Hamza is building a reusable local-first content automation system on n8n. It scores content ideas, researches them with recorded sources, writes an article and platform-specific social posts, runs automated quality checks and revision loops, and requires human approval before anything is published. Approved output is stored as immutable versioned artifacts with hashes. It runs in Docker with 13 exported workflows and a fail-closed dry-run mode. This is workflow automation with a human in the loop.',
+  },
+  {
+    id: 'ai-venture',
+    title: 'Private AI & automation for businesses',
+    source: 'Freelance · AI operations',
+    text: 'As a freelancer Hamza builds private, source-cited AI knowledge assistants and workflow automation for service businesses. He first finds the costliest repetitive workflow, then automates email, document, CRM and reporting handoffs with human approval. He uses private or open-source models when confidentiality requires it and integrates with the tools a team already uses. He is available for freelance projects and contracts.',
+  },
+  {
+    id: 'legal-saas',
+    title: 'Law-firm SaaS for Morocco',
+    source: 'Projects · In development',
+    text: 'Hamza is building a bilingual Arabic (right-to-left) and French practice-management SaaS for Moroccan law firms. The backend uses C# and .NET with PostgreSQL, a background worker monitors court calendars, and the live app uses Next.js. It has role-based access, audit trails, backup and restore verification, over 200 automated tests, and AI features that always defer to a lawyer for review.',
+  },
+  {
+    id: 'vertical-saas',
+    title: 'Accounting & HR SaaS prototypes',
+    source: 'Projects · Prototypes',
+    text: 'Hamza has prototyped Morocco-first accounting and HR SaaS platforms built on exception-driven AI. Routine work completes automatically from approved rules, while ambiguous or sensitive decisions are escalated to a human. The guided payroll demo resolves safe attendance exceptions automatically and requires human confirmation before payroll. They use Next.js, TypeScript and Tailwind in French and Arabic.',
+  },
+  {
+    id: 'mobile',
+    title: 'Mobile development',
+    source: 'Projects & Skills',
+    text: 'Hamza has mobile development experience with React Native (Expo) and C#. He is building a fitness platform for coaches and athletes as a pnpm and Turborepo monorepo with a NestJS API, a Next.js web app and an Expo React Native mobile app, sharing validation, types and a program-generation engine. He also works with C# and .NET on backend services.',
+  },
+  {
+    id: 'ai-remediation',
+    title: 'Bedrock RAG remediation service',
+    source: 'CV · Inveneo',
+    text: 'At Inveneo Hamza built an Amazon Bedrock RAG API that returns remediation guidance and code-fix suggestions for accessibility audit findings. It offers a knowledge-base mode for grounded answers and a direct-model mode, is documented with OpenAPI, authenticated, and covered by contract and validation tests.',
   },
   {
     id: 'contact',
@@ -119,9 +161,9 @@ export const chunks: Chunk[] = [
 ]
 
 export const suggestions = [
+  'What is he building right now?',
+  'Can he build an n8n automation?',
   'What AI and RAG work has he done?',
-  'Has he led a team?',
-  'How does he use automation?',
-  'Does he know AWS serverless?',
-  'What is his networking background?',
+  'Does he have mobile experience?',
+  'Is he available for projects?',
 ]
